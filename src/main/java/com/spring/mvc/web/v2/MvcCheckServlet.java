@@ -24,7 +24,8 @@ public class MvcCheckServlet extends HttpServlet {
 
         // 필요한 데이터를 model 에 담아 둠
         // model 로 사용할 수 있는 객체 (request, session, application)
-        // request: 하나의 요청
+        // 라이프 사이클별로 구분
+        // request: 하나의 요청과 응답 사이
         // session: 웹페이지가 꺼지기 전까지
         // application: 서버가 꺼지기 전까지
 
