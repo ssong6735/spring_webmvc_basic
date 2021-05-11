@@ -75,7 +75,7 @@ public class RequestController {
 
     // 요청 파라미터 받기3 - 커맨드 객체 사용 (파라미터가 많을 경우)
     @GetMapping("/request/param3")
-    public String param3(User user) {
+    public String param3(User user) { // User 클래스를 따로 만들어야 함.
         System.out.println("user = " + user);
         return "test";
     }
