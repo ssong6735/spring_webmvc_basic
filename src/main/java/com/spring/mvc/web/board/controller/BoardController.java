@@ -25,7 +25,7 @@ public class BoardController {
     //글 작성 화면 요청
     @GetMapping("/board/write")
     public String write() {
-        return "board/write";
+        return "board/b_write";
     }
 
     //글 작성 처리 요청
@@ -39,7 +39,7 @@ public class BoardController {
     @GetMapping("/board/list")
     public String list(Model model) {
         model.addAttribute("articles", boardService.getArticles());
-        return "board/list";
+        return "board/b_list";
     }
 
     //글 삭제 요청
@@ -56,7 +56,7 @@ public class BoardController {
             , Model model) {
         Board content = boardService.getContent(boardNo, viewCntFlag);
         model.addAttribute("article", content);
-        return "board/content";
+        return "board/b_content";
     }
 
     //글 수정하기 화면요청
@@ -65,7 +65,7 @@ public class BoardController {
             , @RequestParam("vf") boolean viewCntFlag
             , Model model) {
         model.addAttribute("article", boardService.getContent(boardNo, viewCntFlag));
-        return "board/modify";
+        return "board/b_modify";
     }
 
     //글 수정 처리요청
