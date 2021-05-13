@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Repository // 스프링에 빈 등록
+@Repository("mr") // 스프링에 빈 등록
 @Log4j2 // 로그 사용
 public class MemoryScoreRepository implements ScoreRepository {
 
