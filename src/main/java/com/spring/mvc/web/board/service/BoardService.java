@@ -19,7 +19,7 @@ public class BoardService {
         this.boardRepository = boardRepository;
     }
 
-    //게시글 목록 가져오기
+    //게시글 목록 가져오기 (제일 오래된 글이 0번 인덱스에 오는것을 역순정렬)
     public List<Board> getArticles() {
         List<Board> temp = boardRepository.getArticles();
         List<Board> articles = new ArrayList<>();
@@ -43,6 +43,7 @@ public class BoardService {
     //게시글 내용보기
     public Board getContent(int boardNo, boolean viewFlag) {
         Board content = boardRepository.getContent(boardNo);
+        // vf="true"일때(정상적인 접근루트: 게시글 클릭)만 조회수 상승
         if (viewFlag) {
             content.upViewCount(); //조회수상승
         }

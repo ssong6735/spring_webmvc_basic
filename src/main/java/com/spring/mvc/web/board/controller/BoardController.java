@@ -72,6 +72,7 @@ public class BoardController {
     @PostMapping("/board/modify")
     public String modify(ModifyBoard modArticle
             , @RequestParam("vf") boolean viewCntFlag) {
+        // 원본데이터를 찾아서 수정데이터로 변경하는 로직(서비스에 넣어주는게 좋다)
         Board board = boardService.getContent(modArticle.getBoardNo(), viewCntFlag);
         board.setWriter(modArticle.getWriter());
         board.setTitle(modArticle.getTitle());

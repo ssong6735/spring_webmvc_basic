@@ -34,7 +34,7 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <div class="content-box">${article.content}</div>
+                            <textarea class="content-box" name="content" cols="30" rows="15" disabled>${article.content}</textarea>
                         </td>
                     </tr>
                 </tbody>

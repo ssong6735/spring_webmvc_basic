@@ -188,7 +188,9 @@ table {
 }
 
 .table-box .write-table th,
-.table-box .write-table td {
+.table-box .write-table td,
+.table-box .view-table th,
+.table-box .view-table td {
     line-height: normal;
     /* padding: 0.75rem; */
     padding: 7px;
@@ -222,16 +224,24 @@ table {
     text-indent: 10px;
 }
 
-.table-box .view-table .content-box {
+.table-box .view-table textarea {
+    width: 100%;
+    font-size: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+/* .table-box .view-table .content-box {
     text-align: left;
     width: 99%;
     font-size: 20px;
     padding: 0px 10px;
-    /* border: 1px solid #ccc; */
+    /* border: 1px solid #ccc; * /
     color: #999;
     min-height: 365px;
     margin: 10px auto;
-}
+} */
 
 .no-article {
     text-align: center;
