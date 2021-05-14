@@ -13,16 +13,16 @@ import java.util.Comparator;
 import java.util.List;
 
 @Service
-//@RequiredArgsConstructor //mapper 적용시
+@RequiredArgsConstructor //mapper 적용시
 public class BoardService {
 
-    public final BoardRepository boardRepository;
-    //private final BoardMapper boardRepository; //mapper 적용시
+    //public final BoardRepository boardRepository;
+    private final BoardMapper boardRepository; //mapper 적용시
 
-    @Autowired
+    /*@Autowired
     public BoardService(@Qualifier("bjr") BoardRepository boardRepository) {
         this.boardRepository = boardRepository;
-    }
+    }*/
 
     //게시글 목록 가져오기 (제일 오래된 글이 0번 인덱스에 오는것을 역순정렬)
     public List<Board> getArticles() {
@@ -50,8 +50,8 @@ public class BoardService {
         Board content = boardRepository.getContent(boardNo);
         // vf="true"일때(정상적인 접근루트: 게시글 클릭)만 조회수 상승
         if (viewFlag) {
-            content.upViewCount(); //조회수상승 memory
-            //boardRepository.upViewCnt(boardNo); //mapper 적용시
+            //content.upViewCount(); //조회수상승 memory
+            boardRepository.upViewCnt(boardNo); //mapper 적용시
         }
         return content;
     }
