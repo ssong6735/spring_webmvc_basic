@@ -6,11 +6,12 @@
 <!-- namespace 에는 사용할 인터페이스의 풀 경로(패키지명 포함 인터페이스)를 적는다 -->
 <mapper namespace="com.spring.mvc.web.score.repository.ScoreMapper">
 
-    <!-- 점수 저장 기능 -->
     <!-- id 속성에는 매퍼 인터페이스의 메서드명을 적는다. -->
     <!-- #{} 에는 객체의 필드와 매칭되는 이름을 적는다.
          객체가 들어오면 필드명 적기
     -->
+
+    <!-- 점수 저장 기능 -->
     <insert id="save">
         INSERT INTO score
         (stu_num, stu_name, kor, eng, math, total, average)
@@ -35,7 +36,7 @@
 
     <!-- 전체 정보 조회 기능 (다중행) -->
     <select id="findAll" resultMap="scoreMap">
-        SELECT * FROM score
+        SELECT * FROM score ORDER BY stu_num
     </select>
 
     <!-- 개별 점수 조회 기능 (단일행) -->
