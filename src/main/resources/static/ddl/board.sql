@@ -9,4 +9,4 @@ CREATE TABLE board (
     CONSTRAINT pk_board PRIMARY KEY (board_no)
 );
 
-SELECT * FROM board;
+SELECT * FROM board ORDER BY board_no DESC;

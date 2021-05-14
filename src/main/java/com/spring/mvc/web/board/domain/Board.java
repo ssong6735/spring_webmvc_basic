@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 @Setter @Getter
 @AllArgsConstructor
 @ToString
@@ -28,6 +31,13 @@ public class Board {
         this.writer = writer;
         this.title = title;
         this.content = content;
+    }
+
+    public Board(ResultSet rs) throws SQLException {
+        this.boardNo = rs.getInt("board_no");
+        this.writer = rs.getString("writer");
+        this.title = rs.getString("title");
+        this.content = rs.getString("content");
     }
 
     //조회수 상승처리

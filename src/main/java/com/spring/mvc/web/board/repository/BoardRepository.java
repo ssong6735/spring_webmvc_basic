@@ -18,6 +18,9 @@ public interface BoardRepository {
     //게시글 내용보기
     Board getContent(int boardNo);
 
+    //조회수 올리기
+    void upViewCnt(int boardNo, int viewCnt);
+
     //게시글 수정
     void modifyArticle(Board article);
 
