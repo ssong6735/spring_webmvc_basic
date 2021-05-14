@@ -1,7 +1,9 @@
 package com.spring.mvc.web.score.service;
 
 import com.spring.mvc.web.score.domain.Score;
+import com.spring.mvc.web.score.repository.ScoreMapper;
 import com.spring.mvc.web.score.repository.ScoreRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -9,14 +11,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service // 스프링에 빈 등록
+@RequiredArgsConstructor
 public class ScoreService {
 
-    private final ScoreRepository scoreRepository;
+    //private final ScoreRepository scoreRepository;
+    private final ScoreMapper scoreRepository;
 
-    @Autowired
+    /*@Autowired
     public ScoreService(@Qualifier("jr") ScoreRepository scoreRepository) {
         this.scoreRepository = scoreRepository;
-    }
+    }*/
 
     public void register(Score score) {
         score.calcTotalAvg();
@@ -37,5 +41,11 @@ public class ScoreService {
     public Score getScore(int stuNum) {
        return scoreRepository.findOne(stuNum);
     }
+
+    // 전체 성적 정보 건수 조회 기능
+    public int getCount() {
+        return scoreRepository.getCount();
+    }
+
 
 }
