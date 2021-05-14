@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace 에는 사용할 인터페이스의 풀 경로(패키지명 포함 인터페이스)를 적는다 -->
+<mapper namespace="com.spring.mvc.web.board.repository.BoardMapper">
+
+    <!-- id 속성에는 매퍼 인터페이스의 메서드명을 적는다. -->
+    <!-- #{} 에는 객체의 필드와 매칭되는 이름을 적는다.
+         객체가 들어오면 필드명 적기
+    -->
+
+    <!-- 게시글 등록 -->
+    <insert id="insertArticle">
+        INSERT INTO board
+        (board_no, writer, title, content)
+        VALUES
+        (seq_board.nextval, #{writer}, #{title}, #{content})
+    </insert>
+
+    <!-- 게시글 삭제 -->
+    <delete id="deleteArticle">
+        DELETE FROM board
+        WHERE board_no = #{boardNo}
+    </delete>
+
+    <!-- SELECT 문 처리를 위한 자바 필드와 테이블 컬럼명 매핑 -->
+    <!-- resultMap: 자바의 이름규칙과 SQL 의 이름규칙이 다를때 매핑 처리 -->
+    <!-- id 속성에는 이 맵의 이름을 만들어주고 type 속성에는 해당 클래스 전체 경로 -->
+    <resultMap id="boardMap" type="com.spring.mvc.web.board.domain.Board">
+        <!-- property 속성에는 자바필드명, column 은 테이블 컬럼명 -->
+        <result property="boardNo" column="board_no" />
+        <result property="viewCnt" column="view_cnt" />
+    </resultMap>
+
+    <!-- 게시글 목록 가져오기 -->
+    <select id="getArticles" resultMap="boardMap">
+        SELECT * FROM board ORDER BY board_no
+    </select>
+
+    <!-- 게시글 내용보기 -->
+    <select id="getContent" resultMap="boardMap">
+        SELECT * FROM board
+        WHERE board_no = #{boardNo}
+    </select>
+
+    <!-- 조회수 올리기 -->
+    <update id="upViewCnt">
+        UPDATE board
+        SET view_cnt = view_cnt + 1
+        WHERE board_no = #{boardNo}
+    </update>
+
+
+
+    <!-- 게시글 수정 -->
+    <update id="modifyArticle">
+        UPDATE board
+        SET writer = #{writer},
+        title = #{title},
+        content = #{content}
+        WHERE board_no = #{boardNo}
+    </update>
+
+
+</mapper>
