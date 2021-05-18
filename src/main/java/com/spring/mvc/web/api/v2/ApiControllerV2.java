@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -18,6 +15,7 @@ import java.util.Map;
 
 @RestController // API 를 만들때 사용하는 컨트롤러 아노테이션 (spring v4부터 사용)
 @RequestMapping("/api/v2")
+@CrossOrigin // 다른 서버에서 요청이 올때 CORS 정책을 해제함
 public class ApiControllerV2 {
 
     /*
