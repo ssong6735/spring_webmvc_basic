@@ -243,6 +243,30 @@ table {
     margin: 10px auto;
 } */
 
+.pagination {
+		width: 60%;
+		margin: 0 auto;
+		margin-top: 10px;
+		list-style: none;
+		text-align: center;
+	}
+	.pagination > li {
+		display: inline-block;
+		margin-right: 5px;
+	}
+	.pagination > li > a {
+		text-decoration: none;
+		color: black;
+	}
+	.pagination > li > a:hover {
+		color: yellowgreen;
+	}
+	.pagination > li.active > a {
+		font-weight: bold;
+		color: orangered;
+		font-size: 1.1em;
+	}
+
 .no-article {
     text-align: center;
     font-size: 20px;

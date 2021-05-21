@@ -10,3 +10,15 @@ CREATE TABLE board (
 );
 
 SELECT * FROM board ORDER BY board_no DESC;
+
+
+/*
+SELECT
+    board_no, writer, title, content
+FROM (SELECT /*+INDEX_DESC(board pk_board)*/
+        rownum rn, board_no, writer, title, content
+    FROM board
+    WHERE rownum <= 10)
+WHERE rn > 0
+;
+*/

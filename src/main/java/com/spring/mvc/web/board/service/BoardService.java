@@ -3,6 +3,7 @@ package com.spring.mvc.web.board.service;
 import com.spring.mvc.web.board.domain.Board;
 import com.spring.mvc.web.board.repository.BoardMapper;
 import com.spring.mvc.web.board.repository.BoardRepository;
+import com.spring.mvc.web.paging.Criteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,14 +26,20 @@ public class BoardService {
     }*/
 
     //게시글 목록 가져오기 (제일 오래된 글이 0번 인덱스에 오는것을 역순정렬)
-    public List<Board> getArticles() {
-        List<Board> temp = boardRepository.getArticles();
+    public List<Board> getArticles(Criteria criteria) {
+        /*List<Board> temp = boardRepository.getArticles();
         List<Board> articles = new ArrayList<>();
         for (int i = temp.size() - 1; i >= 0; i--) {
             Board board = temp.get(i);
             articles.add(board);
         }
-        return articles;
+        return articles;*/
+        return boardRepository.getArticles(criteria);
+    }
+
+    // 총 게시물 수 확인
+    public int getTotal() {
+        return boardRepository.getTotalCount();
     }
 
     //게시글 등록

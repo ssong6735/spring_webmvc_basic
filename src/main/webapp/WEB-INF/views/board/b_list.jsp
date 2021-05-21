@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시판 목록 페이지</title>
-    <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="/css/main.css" />
 </head>
 
 <body>
@@ -56,6 +56,27 @@
 
                 </tbody>
             </table>
+
+
+            <!-- 페이지 영역 -->
+            <ul class="pagination">
+
+                <c:if test="${pageMaker.prev}">
+                    <li>
+                        <a href="/board/list?page=${pageMaker.beginPage - 1}">[prev]</a>
+                    </li>
+                </c:if>
+                <!-- li*5>a{[$]} -->
+                <c:forEach var="i" begin="${pageMaker.beginPage}" end="${pageMaker.endPage}" step="1">
+                    <li data-page="${i}"><a href="/board/list?page=${i}">[${i}]</a></li>
+                </c:forEach>
+
+                <c:if test="${pageMaker.next}">
+                    <li>
+                        <a href="/board/list?page=${pageMaker.endPage + 1}">[next]</a>
+                    </li>
+                </c:if>
+            </ul>
         </div>
 
         <div class="list-btn">
@@ -64,6 +85,20 @@
     </div>
 
 
+    <script>
+        //현재 위치한 페이지넘버에 클래스 active를 부여하는 함수 정의
+        function appendPageActive(curPageNum) {
+            const $ul = document.querySelector('.pagination');
+            for (let $li of [...$ul.children]) {
+                if ($li.dataset.page === curPageNum) {
+                    $li.classList.add('active');
+                }
+            }
+        }
+        (function () {
+            appendPageActive('${pageMaker.criteria.page}');
+        }());
+    </script>
 
 </body>
 
