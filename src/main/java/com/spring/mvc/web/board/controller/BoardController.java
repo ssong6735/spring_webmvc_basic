@@ -30,7 +30,11 @@ public class BoardController {
     //글 작성 처리 요청
     @PostMapping("/board/write")
     public String write(Board article) {
-        boardService.insertArticle(article);
+        try {
+            boardService.insertArticle(article);
+        } catch (Exception e) {
+            return "/board/b_write";
+        }
         return "redirect:/board/list";
     }
 
@@ -79,7 +83,11 @@ public class BoardController {
         board.setWriter(modArticle.getWriter());
         board.setTitle(modArticle.getTitle());
         board.setContent(modArticle.getContent());
-        boardService.modifyArticle(board);
+        try {
+            boardService.modifyArticle(board);
+        } catch (Exception e) {
+            return "redirect:/board/content?boardNo=" + modArticle.getBoardNo() + "&vf=false";
+        }
         return "redirect:/board/content?boardNo=" + modArticle.getBoardNo() + "&vf=false";
     }
 }

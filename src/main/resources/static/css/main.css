@@ -258,31 +258,36 @@ table {
     margin: 20px 0;
     vertical-align: middle;
     /* background-color: #f9f9f9; */
-    padding: 7px 0;
+    /* padding: 7px 0; */
 }
 
 .search-box .search-line select {
     width: 100px;
-    height: 35px;
+    height: 40px;
     border: 1px solid #e1e1e1;
     border-bottom: 2px solid #004986;
+    font-size: 16px;
 }
 
 .search-box .search-line input[type=text] {
     width: 200px;
-    height: 35px;
+    height: 40px;
     border-radius: 0;
     border: 1px solid #ccc;
+    font-size: 16px;
+    text-indent: 10px;
 }
 
 .search-box .search-line button {
     width: 50px;
-    height: 33px;
+    height: 38px;
     background-color: #004986;
     color: #fff;
     border: 0;
     border-radius: 5px;
     vertical-align: middle;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 .search-box .search-line button:hover {
@@ -309,7 +314,7 @@ table {
 }
 
 .pagination>li>a:hover {
-    color: yellowgreen;
+    color: orangered;
 }
 
 .pagination>li.active>a {
@@ -359,8 +364,11 @@ table {
     color: #fff;
 }
 
-.lit-btn.align-r {
-    width: 50%;
+.align-r {
+    width: 40%;
+    /* background-color: #CCC; */
+    display: flex;
+    justify-content: flex-end;
     float: right;
 }
 

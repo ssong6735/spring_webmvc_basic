@@ -46,7 +46,7 @@ public class BoardService {
     }
 
     //게시글 등록
-    public void insertArticle(Board article) {
+    public void insertArticle(Board article) throws Exception {
         boardRepository.insertArticle(article);
     }
 
@@ -67,7 +67,7 @@ public class BoardService {
     }
 
     //게시글 수정
-    public void modifyArticle(Board article) {
+    public void modifyArticle(Board article) throws Exception {
         boardRepository.modifyArticle(article);
     }
 
