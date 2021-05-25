@@ -34,12 +34,15 @@ public class BoardService {
             articles.add(board);
         }
         return articles;*/
-        return boardRepository.getArticles(criteria);
+        // 페이징 추가
+        // return boardRepository.getArticles(criteria);
+        // 검색 쿼리
+        return boardRepository.getSearchArticles(criteria);
     }
 
     // 총 게시물 수 확인
-    public int getTotal() {
-        return boardRepository.getTotalCount();
+    public int getTotal(Criteria criteria) {
+        return boardRepository.getTotalCount(criteria);
     }
 
     //게시글 등록

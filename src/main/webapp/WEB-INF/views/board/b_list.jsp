@@ -21,6 +21,14 @@
         <h1>게시글 목록</h1>
 
         <div class="table-box">
+
+            <!-- 게시글 보기 수량 선택 -->
+            <div class="amount">
+                <a href="/board/list${pageMaker.makeParam(pageMaker.criteria.page, 10)}">10</a>
+                <a href="/board/list${pageMaker.makeParam(pageMaker.criteria.page, 20)}">20</a>
+                <a href="/board/list${pageMaker.makeParam(pageMaker.criteria.page, 30)}">30</a>
+            </div>
+
             <table class="table list-table">
                 <tbody>
                     <tr>
@@ -44,7 +52,7 @@
                         <c:forEach var="article" items="${articles}">
                             <tr>
                                 <td>${article.boardNo}</td>
-                                <td><a href="/board/content?boardNo=${article.boardNo}&vf=true">${article.title}</a>
+                                <td><a href="/board/content${pageMaker.makeParam(pageMaker.criteria.page)}&boardNo=${article.boardNo}&vf=true">${article.title}</a>
                                 </td>
                                 <td>${article.writer}</td>
                                 <td>${article.viewCnt}</td>
@@ -57,31 +65,52 @@
                 </tbody>
             </table>
 
+            <!-- 검색창 영역 -->
+            <div class="search">
+                <form class="search-box" action="/board/list" id="search-form">
+                    <input type="hidden" name="amount" value="${pageMaker.criteria.amount}">
+                    <div class="search-line">
+                    <select name="type">
+                        <option value="title" ${pageMaker.criteria.type == 'title' ? 'selected' : ''}>제목</option>
+                        <option value="content" ${pageMaker.criteria.type == 'content' ? 'selected' : ''}>내용</option>
+                        <option value="writer" ${pageMaker.criteria.type == 'writer' ? 'selected' : ''}>작성자</option>
+                        <option value="titleContent" ${pageMaker.criteria.type == 'titleContent' ? 'selected' : ''}>제목+내용</option>
+                    </select>
+                    <input type="text" name="keyword" placeholder="검색어를 입력하세요!" value="${pageMaker.criteria.keyword}">
+                    <button type="submit">검색</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="list-btn align-r">
+                <a class="btn btn-basic" href="/board/write">글쓰기</a>
+            </div>
 
             <!-- 페이지 영역 -->
             <ul class="pagination">
 
                 <c:if test="${pageMaker.prev}">
                     <li>
-                        <a href="/board/list?page=${pageMaker.beginPage - 1}">[prev]</a>
+                        <a href="/board/list${pageMaker.makeParam(pageMaker.beginPage-1)}">[prev]</a>
                     </li>
                 </c:if>
                 <!-- li*5>a{[$]} -->
                 <c:forEach var="i" begin="${pageMaker.beginPage}" end="${pageMaker.endPage}" step="1">
-                    <li data-page="${i}"><a href="/board/list?page=${i}">[${i}]</a></li>
+                    <li data-page="${i}"><a href="/board/list${pageMaker.makeParam(i)}">[${i}]</a></li>
                 </c:forEach>
 
                 <c:if test="${pageMaker.next}">
                     <li>
-                        <a href="/board/list?page=${pageMaker.endPage + 1}">[next]</a>
+                        <a href="/board/list${pageMaker.makeParam(pageMaker.endPage+1)}">[next]</a>
                     </li>
                 </c:if>
             </ul>
+
+
+            
         </div>
 
-        <div class="list-btn">
-            <a class="btn btn-basic" href="/board/write">글쓰기</a>
-        </div>
+        
     </div>
 
 

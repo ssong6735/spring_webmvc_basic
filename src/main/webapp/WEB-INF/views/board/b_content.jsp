@@ -41,7 +41,7 @@
 
             <div class="list-btn">
                 <a class="btn btn-basic" href="/board/modify?boardNo=${article.boardNo}&vf=false">글수정</a>
-                <a class="btn btn-basic" href="/board/list">목록 보기</a>
+                <a class="btn btn-basic" href="/board/list?page=${cri.page}&type=${cri.type}&keyword=${cri.keyword}&amount=${cri.amount}">목록 보기</a>
             </div>
         </div>
 

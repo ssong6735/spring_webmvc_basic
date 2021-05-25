@@ -30,8 +30,8 @@
     <!-- id 속성에는 이 맵의 이름을 만들어주고 type 속성에는 해당 클래스 전체 경로 -->
     <resultMap id="boardMap" type="com.spring.mvc.web.board.domain.Board">
         <!-- property 속성에는 자바필드명, column 은 테이블 컬럼명 -->
-        <result property="boardNo" column="board_no" />
-        <result property="viewCnt" column="view_cnt" />
+        <result property="boardNo" column="board_no"/>
+        <result property="viewCnt" column="view_cnt"/>
     </resultMap>
 
     <!-- 게시글 목록 가져오기 -->
@@ -52,7 +52,38 @@
         FROM board
         WHERE rownum <= #{page} * #{amount})
         WHERE rn > (#{page} - 1) * #{amount}
+        ]]>
+    </select>
 
+    <!-- 3. 검색 쿼리 + 페이징 쿼리 적용 -->
+    <select id="getSearchArticles" resultMap="boardMap">
+        <![CDATA[
+        SELECT
+            board_no, writer, title, content, view_cnt
+        FROM
+            (SELECT /*+INDEX_DESC(board pk_board)*/
+            rownum rn, board_no, writer, title, content, view_cnt
+        FROM board
+        WHERE
+        ]]>
+        <!-- 동적 SQL: 태그로 부분적으로 사용 -->
+            <if test="type == 'title'">
+                title LIKE '%' || #{keyword} || '%' AND
+            </if>
+            <if test="type == 'writer'">
+                writer LIKE '%' || #{keyword} || '%' AND
+            </if>
+            <if test="type == 'content'">
+                content LIKE '%' || #{keyword} || '%' AND
+            </if>
+            <if test="type == 'titleContent'">
+                (title LIKE '%' || #{keyword} || '%'
+                OR content LIKE '%' || #{keyword} || '%')
+                AND
+            </if>
+        <![CDATA[
+            rownum <= #{page} * #{amount})
+        WHERE rn > (#{page} - 1) * #{amount}
         ]]>
     </select>
 
@@ -62,6 +93,19 @@
     <select id="getTotalCount" resultType="int">
         SELECT COUNT(*)
         FROM board
+        <if test="type == 'title'">
+            WHERE title LIKE '%' || #{keyword} || '%'
+        </if>
+        <if test="type == 'writer'">
+            WHERE writer LIKE '%' || #{keyword} || '%'
+        </if>
+        <if test="type == 'content'">
+            WHERE content LIKE '%' || #{keyword} || '%'
+        </if>
+        <if test="type == 'titleContent'">
+            WHERE (title LIKE '%' || #{keyword} || '%'
+            OR content LIKE '%' || #{keyword} || '%')
+        </if>
     </select>
 
     <!-- 게시글 내용보기 -->
@@ -76,7 +120,6 @@
         SET view_cnt = view_cnt + 1
         WHERE board_no = #{boardNo}
     </update>
-
 
 
     <!-- 게시글 수정 -->
