@@ -8,14 +8,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시판 목록 페이지</title>
-    <link rel="stylesheet" href="/css/main.css" />
+
+    <!-- static-head 조각 파일 인클루드 -->
+    <%@ include file="../include/static-head.jsp" %>
 </head>
 
 <body>
-
-
-
-
 
     <div class="wrap">
         <h1>게시글 목록</h1>
@@ -52,7 +50,8 @@
                         <c:forEach var="article" items="${articles}">
                             <tr>
                                 <td>${article.boardNo}</td>
-                                <td><a href="/board/content${pageMaker.makeParam(pageMaker.criteria.page)}&boardNo=${article.boardNo}&vf=true">${article.title}</a>
+                                <td><a
+                                        href="/board/content${pageMaker.makeParam(pageMaker.criteria.page)}&boardNo=${article.boardNo}&vf=true">${article.title}</a>
                                 </td>
                                 <td>${article.writer}</td>
                                 <td>${article.viewCnt}</td>
@@ -70,14 +69,16 @@
                 <form class="search-box" action="/board/list" id="search-form">
                     <input type="hidden" name="amount" value="${pageMaker.criteria.amount}">
                     <div class="search-line">
-                    <select name="type">
-                        <option value="title" ${pageMaker.criteria.type == 'title' ? 'selected' : ''}>제목</option>
-                        <option value="content" ${pageMaker.criteria.type == 'content' ? 'selected' : ''}>내용</option>
-                        <option value="writer" ${pageMaker.criteria.type == 'writer' ? 'selected' : ''}>작성자</option>
-                        <option value="titleContent" ${pageMaker.criteria.type == 'titleContent' ? 'selected' : ''}>제목+내용</option>
-                    </select>
-                    <input type="text" name="keyword" placeholder="검색어를 입력하세요!" value="${pageMaker.criteria.keyword}">
-                    <button type="submit">검색</button>
+                        <select name="type">
+                            <option value="title" ${pageMaker.criteria.type=='title' ? 'selected' : '' }>제목</option>
+                            <option value="content" ${pageMaker.criteria.type=='content' ? 'selected' : '' }>내용</option>
+                            <option value="writer" ${pageMaker.criteria.type=='writer' ? 'selected' : '' }>작성자</option>
+                            <option value="titleContent" ${pageMaker.criteria.type=='titleContent' ? 'selected' : '' }>
+                                제목+내용</option>
+                        </select>
+                        <input type="text" name="keyword" placeholder="검색어를 입력하세요!"
+                            value="${pageMaker.criteria.keyword}">
+                        <button type="submit">검색</button>
                     </div>
                 </form>
             </div>
@@ -105,13 +106,12 @@
                     </li>
                 </c:if>
             </ul>
-
-
-            
         </div>
-
-        
     </div>
+
+
+    <!-- footer 조각 파일 인클루드 -->
+    <%@ include file="../include/footer.jsp" %>
 
 
     <script>

@@ -8,7 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시글 상세보기 페이지</title>
-    <link rel="stylesheet" href="/css/main.css"/>
+
+    <!-- static-head 조각 파일 인클루드 -->
+    <%@ include file="../include/static-head.jsp" %>
 </head>
 
 <body>
@@ -33,7 +35,8 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <textarea class="content-box" name="content" cols="30" rows="15" disabled>${article.content}</textarea>
+                            <textarea class="content-box" name="content" cols="30" rows="15"
+                                disabled>${article.content}</textarea>
                         </td>
                     </tr>
                 </tbody>
@@ -41,11 +44,16 @@
 
             <div class="list-btn">
                 <a class="btn btn-basic" href="/board/modify?boardNo=${article.boardNo}&vf=false">글수정</a>
-                <a class="btn btn-basic" href="/board/list?page=${cri.page}&type=${cri.type}&keyword=${cri.keyword}&amount=${cri.amount}">목록 보기</a>
+                <a class="btn btn-basic"
+                    href="/board/list?page=${cri.page}&type=${cri.type}&keyword=${cri.keyword}&amount=${cri.amount}">목록
+                    보기</a>
             </div>
         </div>
 
     </div>
+
+    <!-- footer 조각 파일 인클루드 -->
+    <%@ include file="../include/footer.jsp" %>
 
 </body>
 

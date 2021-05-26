@@ -8,7 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게시글 수정 페이지</title>
-    <link rel="stylesheet" href="/css/main.css"/>
+
+    <!-- static-head 조각 파일 인클루드 -->
+    <%@ include file="../include/static-head.jsp" %>
 </head>
 
 <body>
@@ -48,6 +50,9 @@
         </div>
 
     </div>
+
+    <!-- footer 조각 파일 인클루드 -->
+    <%@ include file="../include/footer.jsp" %>
 
 </body>
 
