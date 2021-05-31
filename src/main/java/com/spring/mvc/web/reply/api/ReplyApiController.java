@@ -1,5 +1,6 @@
 package com.spring.mvc.web.reply.api;
 
+import com.spring.mvc.web.paging.Criteria;
 import com.spring.mvc.web.reply.domain.Reply;
 import com.spring.mvc.web.reply.service.ReplyService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController // 비동기 전용 컨트롤러
 @RequestMapping("/api/v1/reply")
@@ -20,21 +22,29 @@ public class ReplyApiController {
 
     private final ReplyService replyService;
 
-    // 댓글 목록 조회 요청 처리 // @PathVariable: 경로에있는걸 변수로 쓰겠다.
-    @GetMapping("/{bno}")
-    public ResponseEntity<List<Reply>> getList(
-            @PathVariable("bno") int boardNo) {
+    // 댓글 목록 조회 요청 처리
+    // @PathVariable: 경로에있는걸 변수로 쓰겠다.
+    @GetMapping("/{bno}/{page}")
+    public ResponseEntity<Map<String, Object>> getList(
+            @PathVariable("bno") int boardNo
+            , @PathVariable("page") int page
+    ) {
         log.info("/api/v1/reply/" + boardNo + " GET!!");
-        List<Reply> replies = replyService.getList(boardNo);
+        // 댓글기능 추가 전 기존 코드
+//        List<Reply> replies = replyService.getList(boardNo);
 
-        if(replies != null) {
-            return new ResponseEntity<>(replies, HttpStatus.OK);
+        Criteria criteria = new Criteria(page, 10);
+        Map<String, Object> replyMap = replyService.getList(boardNo, criteria);
+
+        if (replyMap != null) {
+            return new ResponseEntity<>(replyMap, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    // 댓글 등록 처리 요청 // @RequestBody: 비동기로 데이터 받을때 (json)
+    // 댓글 등록 처리 요청
+    // @RequestBody: 비동기로 데이터 받을때 (json)
     @PostMapping("")
     public ResponseEntity<String> create(@RequestBody Reply reply) {
         log.info("/api/v1/reply POST - " + reply);

@@ -131,9 +131,9 @@
         </ul>
 
         <div class="btn-box">
-            <a class="btn" href="/board/list">목록보기</a> 
+            <a class="btn" href="/board/list">목록보기</a>
             <a class="btn" href="/board/modify?boardNo=${article.boardNo}&vf=false">수정하기</a>
-        </div>        
+        </div>
     </div>
 
 </body>

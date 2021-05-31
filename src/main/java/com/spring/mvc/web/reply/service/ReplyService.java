@@ -1,12 +1,16 @@
 package com.spring.mvc.web.reply.service;
 
+import com.spring.mvc.web.paging.Criteria;
+import com.spring.mvc.web.paging.PageMaker;
 import com.spring.mvc.web.reply.domain.Reply;
 import com.spring.mvc.web.reply.repository.ReplyMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -41,8 +45,19 @@ public class ReplyService {
     }
 
     // 댓글 목록 조회 서비스
-    public List<Reply> getList(int boardNo) {
+    // 기존 코드
+    /*public List<Reply> getList(int boardNo) {
         return replyMapper.getList(boardNo);
+    }*/
+
+    // 댓글 기능 추가하면서 변경한 코드
+    public Map<String, Object> getList(int boardNo, Criteria criteria) {
+        Map<String, Object> replyMap = new HashMap<>();
+        replyMap.put("replyList", replyMapper.getList(boardNo, criteria));
+        int count = replyMapper.getCount(boardNo);
+        replyMap.put("count", count);
+        replyMap.put("pageInfo", new PageMaker(criteria, count));
+        return replyMap;
     }
 
 }
