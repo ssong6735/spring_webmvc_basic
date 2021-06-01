@@ -53,7 +53,7 @@
       <div class="container">
          <!-- 댓글 영역 -->
          <div id="replies" class="row">
-            <div class="offset-md-1 col-md-10">
+            <div class="">
                <!-- 댓글 쓰기 영역 -->
                <div class="card">
                   <div class="card-body">
@@ -130,8 +130,8 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
-               <button id="replyModBtn" type="button" class="btn btn-dark">수정</button>
-               <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+               <button id="replyModBtn" type="button" class="btn btn-basic">수정</button>
+               <button type="button" class="btn btn-basic" data-dismiss="modal">닫기</button>
             </div>
 
 
@@ -284,9 +284,120 @@
          //페이지 버튼 클릭 이벤트
          $('.pagination').on('click', 'li a', e => {
             e.preventDefault();
-            // getReplyList(e.target.getAttribute('href'));
-            getReplyList($(this).attr('href'));
+            getReplyList(e.target.getAttribute('href'));
+            // getReplyList($(this).attr('href'));
          });
+
+         // 댓글 등록 버튼 클릭 이벤트
+         $('#replyAddBtn').on('click', e => {
+            // 서버로 댓글 내용을 전송해서 DB 에 저장
+            const reqInfo = {
+               method: 'POST', // 요청방식
+               headers: { // 요청 헤더 내용
+                  'content-type': 'application/json'
+               },
+               // 서버로 전송할 데이터 (JSON)
+               body: JSON.stringify({ // JSON.stringify(): js를 json으로 변경                  
+                  boardNo: boardNo,
+                  replyText: $('#newReplyText').val(),
+                  replyWriter: $('#newReplyWriter').val()
+               })               
+            };
+            fetch('/api/v1/reply', reqInfo)
+            .then(res => res.text())
+            .then(msg => {
+               if(msg === 'insertSuccess') {
+                  getReplyList(1);
+                  $('#newReplyText').val('');
+                  $('#newReplyWriter').val('');
+               } else {
+                  alert('댓글 등록에 실패했습니다.');
+               }
+            })
+         });
+
+         // 댓글 수정 버튼 클릭 이벤트 (수정 창(modal) 열기)
+         const $modal = $('#replyModifyModal');
+         $('#replyData').on('click', '#replyModBtn', e => {
+            // console.log("수정 버튼 클릭!");            
+            //모달 띄우기
+            $modal.modal('show');
+
+            // 기존 댓글내용 가져오기
+            const originText = e.target.parentNode.previousElementSibling.textContent;
+            // console.log(originText);
+            $('#modReplyText').val(originText);
+
+            // 모달 열릴때 모달안에 댓글번호 넣어놓기
+            const replyId = e.target.parentNode.parentNode.parentNode.dataset.replyid;
+            // console.log(replyId);
+
+            $('#modReplyId').val(replyId);
+
+         });
+
+         // 모달창 닫기 이벤트
+         $('.modal-header button, .modal-footer button:last-child').on('click', e => {
+            $modal.modal('hide');
+         });
+
+         // 댓글 수정 요청 이벤트
+         $('#replyModBtn').on('click', e => {
+            // 댓글 번호
+            const replyId = $('#modReplyId').val();
+            // 댓글 내용
+            const replyText = $('#modReplyText').val();
+            //console.log("댓글번호:", replyId);
+            //console.log("댓글내용:", replyText);
+
+            const reqInfo = {
+               method: 'PUT',
+               headers: {
+                  'content-type': 'application/json'
+               },
+               body: JSON.stringify({
+                  replyNo: replyId,
+                  replyText: replyText
+               })
+            };
+            fetch('/api/v1/reply/' + replyId, reqInfo)
+            .then(res => res.text())
+            .then(msg => {
+               if(msg === 'modSuccess') {
+                  $modal.modal('hide');
+                  getReplyList(1);
+               } else {
+                  alert("댓글 수정에 실패했습니다.");
+               }
+            })
+         });
+
+         // 댓글 삭제 비동기 요청 이벤트
+         $('#replyData').on('click', '#replyDelBtn', e => {
+            const replyId = e.target.parentNode.parentNode.parentNode.dataset.replyid;
+            // console.log(replyId);
+            const reqInfo = {
+               method: 'DELETE',
+               headers: {},
+               body: JSON.stringify({
+                  replyNo: replyId
+               })
+            };
+            const result = confirm("댓글을 삭제하시겠습니까?");
+            if(!result==true) {
+               return;
+            }
+            fetch('/api/v1/reply/' + replyId, reqInfo)
+            .then(res => res.text())
+            .then(msg => {
+               if(msg === 'delSuccess') {
+                  getReplyList(1);
+               } else {
+                  alert("댓글 삭제에 실패했습니다.");
+               }
+            })
+         });
+
       });
    </script>
 
