@@ -15,6 +15,10 @@
 
 <body>
 
+    <!-- header 조각 파일 인클루드 -->
+    <%@ include file="../include/header.jsp" %>
+
+
     <div class="wrap">
         <h1>게시글 목록</h1>
 

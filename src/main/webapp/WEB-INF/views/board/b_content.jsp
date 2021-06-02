@@ -15,6 +15,9 @@
 
 <body>
 
+   <!-- header 조각 파일 인클루드 -->
+   <%@ include file="../include/header.jsp" %>
+
    <div class="wrap">
       <h1>No.${article.boardNo} 글 상세보기</h1>
 
@@ -142,6 +145,7 @@
    <!-- end replyModifyModal -->
 
 
+   <!-- footer 조각 파일 인클루드 -->
    <%@ include file="../include/footer.jsp" %>
 
    <script>
