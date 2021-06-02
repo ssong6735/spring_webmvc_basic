@@ -15,3 +15,15 @@ VALUES ('admin', '1234', '관리자', 'admin@gmail.com', 'ADMIN');
 COMMIT;
 
 SELECT * FROM member;
+
+
+-- 회원가입여부 확인 (아이디가 있으면 보이고 없으면 공집합)
+SELECT * FROM member
+WHERE account = 'admin';
+
+
+
+-- 중복체크 쿼리
+SELECT COUNT(*) FROM member
+WHERE account = 'admin123';
+-- '사용자가 가입하려고 하는 아이디';
