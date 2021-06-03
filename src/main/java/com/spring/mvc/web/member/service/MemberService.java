@@ -1,5 +1,6 @@
 package com.spring.mvc.web.member.service;
 
+import com.spring.mvc.web.member.domain.LoginInfo;
 import com.spring.mvc.web.member.domain.Member;
 import com.spring.mvc.web.member.repository.MemberMapper;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +18,8 @@ public class MemberService {
 
     // 회원 가입 기능
     public void signUp(Member member) {
-        /* // 도메인 클래스에 설정해서 주석처리
         String rp = member.getPassword(); // 평문비번 찾아서
-        member.setPassword(new BCryptPasswordEncoder().encode(rp)); // 암호화 인코딩 후 다시 세팅*/
+        member.setPassword(new BCryptPasswordEncoder().encode(rp)); // 암호화 인코딩 후 다시 세팅
         memberMapper.register(member);
     }
 
@@ -44,9 +44,21 @@ public class MemberService {
     }
 
 
+    // 로그인 처리 기능
+    public String login(LoginInfo inputMember) {
 
+        Member dbMember = memberMapper.getUser(inputMember.getAccount());
 
+        if (dbMember != null) {
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            if (encoder.matches(inputMember.getPassword(), dbMember.getPassword())) {
+                return "success";
+            } else {
+                return "pwFail";
+            }
+        } else {
+            return "idFail";
+        }
 
-
-
+    }
 }

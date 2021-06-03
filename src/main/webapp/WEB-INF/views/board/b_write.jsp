@@ -23,11 +23,12 @@
 
         <div class="table-box">
             <form action="/board/write" method="POST">
+                <input type="hidden" name="writer" value="${loginUser.account}">
                 <table class="table write-table">
                     <tbody>
                         <tr>
                             <th width="10%"><label for="writer"># 작성자:</label></th>
-                            <td width="15%"><input type="text" name="writer"></td>
+                            <td width="15%"><input type="text" name="writer" value="${loginUser.name}" disabled></td>
                             <th width="10%"><label for="title"># 글제목:</label></th>
                             <td><input type="text" name="title"></td>
                         </tr>

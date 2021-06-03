@@ -46,7 +46,9 @@
          </table>
 
          <div class="list-btn">
-            <a class="btn btn-basic" href="/board/modify?boardNo=${article.boardNo}&vf=false">글수정</a>
+            <c:if test="${article.writer == loginUser.account || loginUser.auth == 'ADMIN'}">
+               <a class="btn btn-basic" href="/board/modify?boardNo=${article.boardNo}&vf=false">글수정</a>
+            </c:if>
             <a class="btn btn-basic"
                href="/board/list?page=${cri.page}&type=${cri.type}&keyword=${cri.keyword}&amount=${cri.amount}">목록
                보기</a>
@@ -57,28 +59,40 @@
          <!-- 댓글 영역 -->
          <div id="replies" class="row">
             <div class="">
+
                <!-- 댓글 쓰기 영역 -->
-               <div class="card">
-                  <div class="card-body">
-                     <div class="row">
-                        <div class="col-md-9">
-                           <div class="form-group">
-                              <label for="newReplyText" hidden>댓글 내용</label>
-                              <textarea rows="3" id="newReplyText" name="replyText" class="form-control"
-                                 placeholder="댓글을 입력해주세요."></textarea>
+               <%-- 비로그인시 로그인하도록 유도 "댓글은 로그인 후 작성 가능합니다." 출력 --%>
+               <c:if test="${loginUser.account == null}">
+                  <div class="card">
+                     <div class="card-body">
+                        <a href="/member/sign-in">댓글은 로그인 후 작성 가능합니다.</a>
+                     </div>
+                  </div>
+               </c:if>
+
+               <c:if test="${loginUser.account != null}">
+                  <div class="card">
+                     <div class="card-body">
+                        <div class="row">
+                           <div class="col-md-9">
+                              <div class="form-group">
+                                 <label for="newReplyText" hidden>댓글 내용</label>
+                                 <textarea rows="3" id="newReplyText" name="replyText" class="form-control"
+                                    placeholder="댓글을 입력해주세요."></textarea>
+                              </div>
                            </div>
-                        </div>
-                        <div class="col-md-3">
-                           <div class="form-group">
-                              <label for="newReplyWriter" hidden>댓글 작성자</label>
-                              <input id="newReplyWriter" name="replyWriter" type="text" class="form-control"
-                                 placeholder="작성자 이름" style="margin-bottom: 6px;">
-                              <button id="replyAddBtn" type="button" class="btn btn-dark form-control">등록</button>
+                           <div class="col-md-3">
+                              <div class="form-group">
+                                 <label for="newReplyWriter" hidden>댓글 작성자</label>
+                                 <input id="newReplyWriter" name="replyWriter" type="text" class="form-control"
+                                    placeholder="작성자 이름" style="margin-bottom: 6px;">
+                                 <button id="replyAddBtn" type="button" class="btn btn-dark form-control">등록</button>
+                              </div>
                            </div>
                         </div>
                      </div>
-                  </div>
-               </div> <!-- end reply write -->
+                  </div> <!-- end reply write -->
+               </c:if>
 
                <!--댓글 내용 영역-->
                <div class="card">
@@ -305,19 +319,19 @@
                   boardNo: boardNo,
                   replyText: $('#newReplyText').val(),
                   replyWriter: $('#newReplyWriter').val()
-               })               
+               })
             };
             fetch('/api/v1/reply', reqInfo)
-            .then(res => res.text())
-            .then(msg => {
-               if(msg === 'insertSuccess') {
-                  getReplyList(1);
-                  $('#newReplyText').val('');
-                  $('#newReplyWriter').val('');
-               } else {
-                  alert('댓글 등록에 실패했습니다.');
-               }
-            })
+               .then(res => res.text())
+               .then(msg => {
+                  if (msg === 'insertSuccess') {
+                     getReplyList(1);
+                     $('#newReplyText').val('');
+                     $('#newReplyWriter').val('');
+                  } else {
+                     alert('댓글 등록에 실패했습니다.');
+                  }
+               })
          });
 
          // 댓글 수정 버튼 클릭 이벤트 (수정 창(modal) 열기)
@@ -365,15 +379,15 @@
                })
             };
             fetch('/api/v1/reply/' + replyId, reqInfo)
-            .then(res => res.text())
-            .then(msg => {
-               if(msg === 'modSuccess') {
-                  $modal.modal('hide');
-                  getReplyList(1);
-               } else {
-                  alert("댓글 수정에 실패했습니다.");
-               }
-            })
+               .then(res => res.text())
+               .then(msg => {
+                  if (msg === 'modSuccess') {
+                     $modal.modal('hide');
+                     getReplyList(1);
+                  } else {
+                     alert("댓글 수정에 실패했습니다.");
+                  }
+               })
          });
 
          // 댓글 삭제 비동기 요청 이벤트
@@ -388,18 +402,18 @@
                })
             };
             const result = confirm("댓글을 삭제하시겠습니까?");
-            if(!result==true) {
+            if (!result == true) {
                return;
             }
             fetch('/api/v1/reply/' + replyId, reqInfo)
-            .then(res => res.text())
-            .then(msg => {
-               if(msg === 'delSuccess') {
-                  getReplyList(1);
-               } else {
-                  alert("댓글 삭제에 실패했습니다.");
-               }
-            })
+               .then(res => res.text())
+               .then(msg => {
+                  if (msg === 'delSuccess') {
+                     getReplyList(1);
+                  } else {
+                     alert("댓글 삭제에 실패했습니다.");
+                  }
+               })
          });
 
       });

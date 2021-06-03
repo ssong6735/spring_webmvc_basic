@@ -44,12 +44,12 @@ public class ReplyService {
         return replyMapper.read(replyNo);
     }
 
+
     // 댓글 목록 조회 서비스
     // 기존 코드
     /*public List<Reply> getList(int boardNo) {
         return replyMapper.getList(boardNo);
     }*/
-
     // 댓글 기능 추가하면서 변경한 코드
     public Map<String, Object> getList(int boardNo, Criteria criteria) {
         Map<String, Object> replyMap = new HashMap<>();

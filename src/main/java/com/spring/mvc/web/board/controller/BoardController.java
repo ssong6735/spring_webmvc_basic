@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class BoardController {
 
@@ -23,7 +25,11 @@ public class BoardController {
 
     //글 작성 화면 요청
     @GetMapping("/board/write")
-    public String write() {
+    public String write(HttpSession session) {
+
+        if (session.getAttribute("loginUser") == null) {
+            return "redirect:/member/sign-in";
+        }
         return "board/b_write";
     }
 

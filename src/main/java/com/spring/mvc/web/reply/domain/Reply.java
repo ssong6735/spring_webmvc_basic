@@ -15,5 +15,6 @@ public class Reply {
     private String replyWriter; // 댓글 작성자
     private Date replyDate; // 댓글 작성 시간
 
+//    private int totalReplyCount; // 총 댓글 수
 
 }

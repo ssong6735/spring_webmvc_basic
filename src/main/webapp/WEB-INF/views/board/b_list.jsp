@@ -54,12 +54,24 @@
                         <c:forEach var="article" items="${articles}">
                             <tr>
                                 <td>${article.boardNo}</td>
-                                <td><a
-                                        href="/board/content${pageMaker.makeParam(pageMaker.criteria.page)}&boardNo=${article.boardNo}&vf=true">${article.title}</a>
+                                <td>
+                                    <a
+                                        href="/board/content${pageMaker.makeParam(pageMaker.criteria.page)}&boardNo=${article.boardNo}&vf=true">
+                                        ${article.title}
+                                        <!-- 댓글이 있을때만 댓글 카운트 보여지게 하기 -->
+                                        <c:if test="${replyList.size() > 0}">
+                                            <span id="replyCnt">0</span>
+                                        </c:if>
+                                    </a>
+                                    
                                 </td>
                                 <td>${article.writer}</td>
                                 <td>${article.viewCnt}</td>
-                                <td><a class="del-btn" href="/board/delete?boardNo=${article.boardNo}">삭제</a></td>
+                                <td>
+                                    <c:if test="${article.writer == loginUser.account || loginUser.auth == 'ADMIN'}">
+                                        <a class="del-btn" href="/board/delete?boardNo=${article.boardNo}">삭제</a>
+                                    </c:if>
+                                </td>
                             </tr>
                         </c:forEach>
 
