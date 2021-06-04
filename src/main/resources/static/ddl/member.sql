@@ -27,3 +27,8 @@ WHERE account = 'admin';
 SELECT COUNT(*) FROM member
 WHERE account = 'admin123';
 -- '사용자가 가입하려고 하는 아이디';
+
+
+-- 자동로그인 관련 컬럼 추가 (세션 고유ID, 수명)
+ALTER TABLE member ADD session_id VARCHAR2(200) DEFAULT 'none';
+ALTER TABLE member ADD limit_time DATE;

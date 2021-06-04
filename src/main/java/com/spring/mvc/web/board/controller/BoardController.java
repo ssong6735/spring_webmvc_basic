@@ -27,9 +27,11 @@ public class BoardController {
     @GetMapping("/board/write")
     public String write(HttpSession session) {
 
+        /*// 로그인 세션 검증
         if (session.getAttribute("loginUser") == null) {
             return "redirect:/member/sign-in";
-        }
+        }*/
+
         return "board/b_write";
     }
 
@@ -76,6 +78,7 @@ public class BoardController {
     public String modify(int boardNo
             , @RequestParam("vf") boolean viewCntFlag
             , Model model) {
+
         model.addAttribute("article", boardService.getContent(boardNo, viewCntFlag));
         return "board/b_modify";
     }
