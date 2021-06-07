@@ -19,6 +19,6 @@
 </header>
 
 
-<c:if test="${loginUser != null}">
+<!-- <c:if test="${loginUser != null}">
     <div>현재 로그인한 유저: ${loginUser.name}</div>
-</c:if>
+</c:if> -->

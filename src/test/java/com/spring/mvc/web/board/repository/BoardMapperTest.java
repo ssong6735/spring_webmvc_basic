@@ -1,16 +1,11 @@
 package com.spring.mvc.web.board.repository;
 
 import com.spring.mvc.web.board.domain.Board;
-import com.spring.mvc.web.paging.Criteria;
-import com.spring.mvc.web.score.domain.Score;
+import com.spring.mvc.web.common.paging.Criteria;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class BoardMapperTest {

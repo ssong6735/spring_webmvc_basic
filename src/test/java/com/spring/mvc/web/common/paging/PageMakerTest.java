@@ -1,11 +1,9 @@
-package com.spring.mvc.web.paging;
+package com.spring.mvc.web.common.paging;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class PageMakerTest {
     

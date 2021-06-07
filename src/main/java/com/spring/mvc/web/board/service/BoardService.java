@@ -2,15 +2,10 @@ package com.spring.mvc.web.board.service;
 
 import com.spring.mvc.web.board.domain.Board;
 import com.spring.mvc.web.board.repository.BoardMapper;
-import com.spring.mvc.web.board.repository.BoardRepository;
-import com.spring.mvc.web.paging.Criteria;
+import com.spring.mvc.web.common.paging.Criteria;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 @Service

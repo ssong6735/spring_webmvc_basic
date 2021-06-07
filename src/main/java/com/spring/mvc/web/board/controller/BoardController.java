@@ -2,10 +2,9 @@ package com.spring.mvc.web.board.controller;
 
 import com.spring.mvc.web.board.domain.Board;
 import com.spring.mvc.web.board.domain.ModifyBoard;
-import com.spring.mvc.web.board.repository.BoardRepository;
 import com.spring.mvc.web.board.service.BoardService;
-import com.spring.mvc.web.paging.Criteria;
-import com.spring.mvc.web.paging.PageMaker;
+import com.spring.mvc.web.common.paging.Criteria;
+import com.spring.mvc.web.common.paging.PageMaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

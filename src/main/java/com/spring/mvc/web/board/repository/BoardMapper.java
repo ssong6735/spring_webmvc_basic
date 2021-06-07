@@ -1,7 +1,7 @@
 package com.spring.mvc.web.board.repository;
 
 import com.spring.mvc.web.board.domain.Board;
-import com.spring.mvc.web.paging.Criteria;
+import com.spring.mvc.web.common.paging.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

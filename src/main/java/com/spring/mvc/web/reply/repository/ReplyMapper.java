@@ -1,6 +1,6 @@
 package com.spring.mvc.web.reply.repository;
 
-import com.spring.mvc.web.paging.Criteria;
+import com.spring.mvc.web.common.paging.Criteria;
 import com.spring.mvc.web.reply.domain.Reply;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

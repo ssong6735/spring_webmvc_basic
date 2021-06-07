@@ -1,7 +1,7 @@
 package com.spring.mvc.web.reply.service;
 
-import com.spring.mvc.web.paging.Criteria;
-import com.spring.mvc.web.paging.PageMaker;
+import com.spring.mvc.web.common.paging.Criteria;
+import com.spring.mvc.web.common.paging.PageMaker;
 import com.spring.mvc.web.reply.domain.Reply;
 import com.spring.mvc.web.reply.repository.ReplyMapper;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service

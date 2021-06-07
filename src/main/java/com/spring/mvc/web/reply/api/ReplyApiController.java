@@ -1,6 +1,6 @@
 package com.spring.mvc.web.reply.api;
 
-import com.spring.mvc.web.paging.Criteria;
+import com.spring.mvc.web.common.paging.Criteria;
 import com.spring.mvc.web.reply.domain.Reply;
 import com.spring.mvc.web.reply.service.ReplyService;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController // 비동기 전용 컨트롤러

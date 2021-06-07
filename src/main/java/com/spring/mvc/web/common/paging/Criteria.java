@@ -1,4 +1,4 @@
-package com.spring.mvc.web.paging;
+package com.spring.mvc.web.common.paging;
 
 import lombok.Getter;
 import lombok.Setter;
