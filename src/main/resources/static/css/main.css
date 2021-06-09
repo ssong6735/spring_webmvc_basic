@@ -330,3 +330,66 @@ footer {
     background-color: #ccc;
     padding: 20px;
 }
+
+
+/* 파일 업로드 및 삭제 */
+#upload-box { 
+    width: 800px;
+    text-align: center;
+    margin: 30px auto;
+ }
+ #upload-box form {
+     display: flex;
+     margin-bottom: 10px;
+ }
+ #upload-box form input {
+     flex: 1;
+ }
+
+ 
+.fileDrop {
+    width: 100%;
+    height: 150px;
+    border: 1px solid gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+}
+.uploaded-list {
+    display: flex;
+    padding: 30px;
+    border-bottom: 1px solid #ccc;
+}
+.uploaded-list a {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.uploaded-list a img {
+    width: 100px;
+    height: 100px;
+    display: block;
+}
+.uploaded-list .thumbnail-box {
+    display: flex;
+    text-align: center;
+    align-items: flex-start;
+    margin-right: 30px;
+    width:100px;    
+}
+.uploaded-list .thumbnail-box img {
+    width: 100%;
+    height: auto;
+}
+.uploaded-list .thumbnail-box span {
+    width: 100%;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.uploaded-list .thumbnail-box .del-btn {
+    background-color: orangered;
+    color: #fff;
+    padding: 3px 10px;
+}

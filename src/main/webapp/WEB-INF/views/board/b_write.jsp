@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    
+
     <!-- header 조각 파일 인클루드 -->
     <%@ include file="../include/header.jsp" %>
 
@@ -42,13 +42,34 @@
                     </tbody>
                 </table>
 
+                <div class="upload-wrap">
+                    <!-- 비동기 통신을 통한 실시간 파일 업로드 -->
+                    <div class="fileDrop">
+                        <span>Drop Here!!</span>
+                    </div>
+
+                    <!-- 
+                        - 파일정보를 서버로 보내기 위해서는 <input type="file"> 이 필요함
+                        - 해당 태그는 사용자에게 나타내서 파일을 직접 탐색기를 통해 선택하게 할 것인지
+                          혹은 드래그 앤 드롭으로만 처리할 것이냐에 따라 display 상태를 결정
+                    -->
+
+                    <div class="uploadDiv">
+                        <input type="file" name="files" id="ajax-file" style="display: none;">
+                    </div>
+
+                    <!-- 업로드된 파일의 썸네일을 보여줄 영역 -->
+                    <div class="uploaded-list"></div>
+                </div>
+
                 <div class="list-btn">
                     <button type="submit" class="btn btn-basic">새글 등록</button>
                     <a class="btn btn-basic" href="/board/list">목록 보기</a>
                 </div>
 
                 <!-- Button trigger modal 모달기능 가려놓음. 사용하려면 fade 지우기 -->
-                <button type="button" class="btn btn-primary fade" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-primary fade" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
                     모달 테스트
                 </button>
             </form>
@@ -77,6 +98,9 @@
 
     <!-- footer 조각 파일 인클루드 -->
     <%@ include file="../include/footer.jsp" %>
+
+    <!-- file-upload script 조각 파일 인클루드 -->
+    <%@ include file="../include/file-upload.jsp" %>    
 
 </body>
 

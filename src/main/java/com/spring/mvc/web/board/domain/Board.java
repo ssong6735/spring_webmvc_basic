@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 @Setter @Getter
 @AllArgsConstructor
@@ -21,6 +22,9 @@ public class Board {
     private String title; // 글제목
     private String content; // 글내용
     private int viewCnt; //조회수
+
+    // 첨부파일 경로 리스트
+    private List<String> filePathList;
 
     public Board() {
         this.boardNo = ++sequence;

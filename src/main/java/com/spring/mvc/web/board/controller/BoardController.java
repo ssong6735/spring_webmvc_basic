@@ -5,14 +5,17 @@ import com.spring.mvc.web.board.domain.ModifyBoard;
 import com.spring.mvc.web.board.service.BoardService;
 import com.spring.mvc.web.common.paging.Criteria;
 import com.spring.mvc.web.common.paging.PageMaker;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
+@Log4j2
 public class BoardController {
 
     private final BoardService boardService;
@@ -38,6 +41,11 @@ public class BoardController {
     @PostMapping("/board/write")
     public String write(Board article) {
         try {
+            log.info("/board/write POST: " + article);
+
+            List<String> files = article.getFilePathList();
+            log.info(files);
+
             boardService.insertArticle(article);
         } catch (Exception e) {
             return "/board/b_write";

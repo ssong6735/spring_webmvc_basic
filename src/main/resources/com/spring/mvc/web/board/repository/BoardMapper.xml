@@ -18,6 +18,17 @@
         VALUES
         (seq_board.nextval, #{writer}, #{title}, #{content})
     </insert>
+    <!-- 첨부파일 추가 쿼리 -->
+    <insert id="addFile">
+        INSERT INTO file_upload
+        (file_path, board_no)
+        VALUES
+        (#{filePath}, seq_board.currval)
+    </insert>
+    <!--
+        첨부파일이 다 등록되기전에 게시글 등록 insert 가 끝나지 않으므로
+        seq_board.nextval 대신 seq_board.currval 사용
+    -->
 
     <!-- 게시글 삭제 -->
     <delete id="deleteArticle">

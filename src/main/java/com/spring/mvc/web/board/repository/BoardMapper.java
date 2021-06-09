@@ -38,4 +38,7 @@ public interface BoardMapper {
     //게시글 수정
     void modifyArticle(Board article);
 
+    //파일 첨부 기능
+    void addFile(String filePath);
+
 }
