@@ -129,7 +129,10 @@ table {
 }
 
 .table-box .list-table td:nth-child(2) a {
-    display: block;
+    display: inline-block;
+}
+.table-box .list-table td:nth-child(2) span {
+    text-indent: 0; 
 }
 
 .table-box .write-table th,
@@ -389,6 +392,47 @@ footer {
     text-overflow:ellipsis;
 }
 .uploaded-list .thumbnail-box .del-btn {
+    background-color: orangered;
+    color: #fff;
+    padding: 3px 10px;
+}
+
+/* content page file upload */
+.attach-file-list {
+    display: flex;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+    background: #f9f9f9;
+}
+.attach-file-list a {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.attach-file-list a img {
+    width: 100px;
+    height: 100px;
+    display: block;
+}
+.attach-file-list .thumbnail-box {
+    display: flex;
+    text-align: center;
+    align-items: flex-start;
+    margin-right: 30px;
+    width:100px;    
+}
+.attach-file-list .thumbnail-box img {
+    width: 100%;
+    height: auto;
+}
+.attach-file-list .thumbnail-box span {
+    width: 100%;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.attach-file-list .thumbnail-box .del-btn {
     background-color: orangered;
     color: #fff;
     padding: 3px 10px;

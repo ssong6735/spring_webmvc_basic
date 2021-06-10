@@ -43,6 +43,7 @@
         <!-- property 속성에는 자바필드명, column 은 테이블 컬럼명 -->
         <result property="boardNo" column="board_no"/>
         <result property="viewCnt" column="view_cnt"/>
+        <result property="regDate" column="reg_date"/>
     </resultMap>
 
     <!-- 게시글 목록 가져오기 -->
@@ -70,10 +71,10 @@
     <select id="getSearchArticles" resultMap="boardMap">
         <![CDATA[
         SELECT
-            board_no, writer, title, content, view_cnt
+            board_no, writer, title, content, view_cnt, reg_date
         FROM
             (SELECT /*+INDEX_DESC(board pk_board)*/
-            rownum rn, board_no, writer, title, content, view_cnt
+            rownum rn, board_no, writer, title, content, view_cnt, reg_date
         FROM board
         WHERE
         ]]>
@@ -122,6 +123,12 @@
     <!-- 게시글 내용보기 -->
     <select id="getContent" resultMap="boardMap">
         SELECT * FROM board
+        WHERE board_no = #{boardNo}
+    </select>
+
+    <!-- 첨부파일 경로 불러오기 -->
+    <select id="getFilePaths" resultType="String">
+        SELECT file_path FROM file_upload
         WHERE board_no = #{boardNo}
     </select>
 

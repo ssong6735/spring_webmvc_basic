@@ -63,7 +63,11 @@
                                             <span id="replyCnt">0</span>
                                         </c:if>
                                     </a>
-                                    
+
+                                    <c:if test="${article.newArticle}">
+                                        <span class="badge rounded-pill bg-danger">new</span>
+                                    </c:if>
+
                                 </td>
                                 <td>${article.writer}</td>
                                 <td>${article.viewCnt}</td>
